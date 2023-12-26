@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
-import classNames from "classnames";
 
 export default function Home() {
   const [movieTitle, setMovieTitle] = useState("");
@@ -40,11 +39,11 @@ export default function Home() {
   );
 
   const ulClass = classnames(
-    "mb-6 flex flex-col space-y-6 md:space-y-0 md:space-x-4 md:flex-row",
+    "mb-6 flex w-6xl flex-col space-y-6 md:space-y-0 md:space-x-4 md:flex-row",
   );
 
   return (
-    <main className="container-full p-10 bg-gray-100 min-h-screen m-0 w-6xl">
+    <main className="flex flex-col items-center container-full p-10 bg-gray-100 min-h-screen m-0 w-6xl">
       <div className="mb-2">
         <h1>My movie list</h1>
       </div>
