@@ -61,4 +61,6 @@ const movieSlice = createSlice({
 });
 
 const store = configureStore({ reducer: movieSlice.reducer });
+
+export const { addMovie, addToBasket, addToLikedMovies } = movieSlice.actions;
 export default store;

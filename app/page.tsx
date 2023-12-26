@@ -3,32 +3,29 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
+import { addMovie, addToBasket, addToLikedMovies } from "../store";
 
+interface RootState {
+  movies: { title: string; liked: boolean; inBasket: boolean }[];
+  basket: string[];
+  likedMovies: string[];
+}
 export default function Home() {
   const [movieTitle, setMovieTitle] = useState("");
   const dispatch = useDispatch();
-  const movies = useSelector(
-    (state: {
-      movies: { title: string; liked: boolean; inBasket: boolean }[];
-    }) => state.movies,
-  );
-  const basket = useSelector((state: { basket: [] }) => state.basket);
-  const likedMovies = useSelector(
-    (state: { likedMovies: [] }) => state.likedMovies,
-  );
+  const movies = useSelector((state: RootState) => state.movies);
+  const basket = useSelector((state: RootState) => state.basket);
+  const likedMovies = useSelector((state: RootState) => state.likedMovies);
   const handleAddMovie = () => {
-    dispatch({
-      type: "ADD_MOVIE",
-      payload: { title: movieTitle, inBasket: false, liked: false },
-    });
+    const newMove = { title: movieTitle, inBasket: false, liked: false };
+    dispatch(addMovie(newMove));
     setMovieTitle("");
   };
 
-  const handleAddToBasket = (movie: string) =>
-    dispatch({ type: "ADD_TO_BASKET", payload: movie });
+  const handleAddToBasket = (movie: string) => dispatch(addToBasket(movie));
 
   const handleAddToLikedMovies = (movie: string) =>
-    dispatch({ type: "LIKE_MOVIE", payload: movie });
+    dispatch(addToLikedMovies(movie));
 
   const buttonClass = classnames(
     "flex justify-center items-center ml-4 px-2 py-2 w-sm border shadow text-xs shadow-xl outline-none rounded-full bg-cyan-700 text-white font-bold hover:opacity-70 uppercase duration-500 hover:scale-105",
